@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Fri Oct 26 11:32:58 CEST 2012
+markTmpDer=true
+builderNum=0
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=dvi
+tempDir=tmp
+mainTexFile=document.tex
+outputFile=document.dvi
+langSpell=en
+markDer=true
+srcDir=
