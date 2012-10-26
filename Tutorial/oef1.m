@@ -26,9 +26,3 @@ figure(2);
 plot(t,f(t));
 
 save data x y;
-
-<<<<<<< HEAD
-
-%test
-=======
->>>>>>> Test met git
