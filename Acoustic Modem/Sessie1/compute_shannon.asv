@@ -1,7 +1,7 @@
 Fs = 16000;
 B = Fs/2;
 DFTsize = 512;
-N = DFTsize/2;
+N = DFTsize/2; % ??
 
 t = zeros(Fs,1);
 for i=1:Fs
@@ -36,5 +36,4 @@ Ps = Ps0-Pn;
 
 
 
-Cv = log2(1+(Ps./Pn));
-C = Fs/(2*N) * sum(Cv);
+C = Fs/(2*N) * symsum(log2(1+(Ps/Pn)),k,1,N)
