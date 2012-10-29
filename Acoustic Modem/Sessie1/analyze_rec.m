@@ -8,10 +8,10 @@ for i=1:2*Fs
    t(i,1)= (1/Fs)*i;
 end
 
-% sig = sin(2*pi*freq*t);
+% sig = sin(2*pi*freq*t)+0.1;
 % sig = sin(2*pi*50*t) + sin(2*pi*100*t) + sin(2*pi*200*t) + sin(2*pi*500*t) + sin(2*pi*1000*t) + sin(2*pi*2000*t) + sin(2*pi*4000*t) + sin(2*pi*6000*t);
-% sig = randn(2*Fs, 1); %Gaussisch verdeelde ruis
- sig = rand(2*Fs, 1)-0.5; %normaal verdeelde ruis
+ sig = randn(2*Fs, 1); %Gaussisch verdeelde ruis
+% sig = rand(2*Fs, 1)-0.5; %normaal verdeelde ruis
 % sound(sig, Fs);
 
 [simin,nbsecs,fs] = initparams(sig,Fs);
