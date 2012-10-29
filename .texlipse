@@ -1,14 +1,14 @@
 #TeXlipse project settings
-#Fri Oct 26 11:32:58 CEST 2012
+#Mon Oct 29 21:52:21 CET 2012
 markTmpDer=true
-builderNum=0
+builderNum=2
 outputDir=
 makeIndSty=
 bibrefDir=
-outputFormat=dvi
+outputFormat=pdf
 tempDir=tmp
-mainTexFile=document.tex
-outputFile=document.dvi
+mainTexFile=AcousticModem.tex
+outputFile=AcousticModem.pdf
 langSpell=en
 markDer=true
 srcDir=
