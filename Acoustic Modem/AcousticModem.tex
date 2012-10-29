@@ -1,19 +1,346 @@
 %%This is a very basic article template.
 %%There is just one section and two subsections.
-\documentclass{article}
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{titling}
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}
+}
+
+\title{ Acoustic Modem Project:}
+\subtitle{Audio Playback, recording and analysis}
+\author{Frederic Mes, Wim Marynissen}
+ \date{\today}
+
 
 \begin{document}
+\maketitle
 
+\section{Exercise 1: Audio playback/recording}
+Done.
 
-\section{Title}
+%\subsection{Another subtitle}
 
-\subsection{Subtitle}
-
-Plain text.
-
-\subsection{Another subtitle}
-
-More plain text.
-
+\section{Exercise 2: Time-frequency analysis of recorded signals}
 
 \end{document}
+
+
+
+
+%
+% \documentclass[a4paper,11pt]{article}
+% \usepackage[dutch]{babel}
+% \usepackage{amsmath}
+% \usepackage{graphicx}
+% \usepackage{enumerate}
+% \usepackage{epstopdf}
+% \usepackage{subfig}
+% \usepackage{algorithmic}
+% \usepackage{algorithm}
+% \usepackage{amssymb}
+% \usepackage{epsfig}
+%   
+%   
+% \usepackage[margin=1.4in,vmargin=1.3in]{geometry}
+% \abovecaptionskip 0.1in
+% \belowcaptionskip 0.25in
+%   
+% \title{\huge Netwerksimulatie: verslag sessie 2: \\ ``Small UDP streams''}
+% \author{Frederic Mes, Wim Marynissen}
+% \date{vrijdag 4 mei 2012}
+%   
+% \newcommand{\dx}{\Delta x}
+% \newcommand{\dy}{\Delta y}
+% \newcommand{\dz}{\Delta z}
+% \newcommand{\dt}{\Delta t}
+%   
+% \usepackage{listings}
+% \usepackage{color}
+% \usepackage{xcolor}
+% \usepackage{textcomp}
+% \definecolor{listinggray}{gray}{0.8}
+% \definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+% \lstset{
+%     backgroundcolor=\color{lbcolor},
+%     tabsize=4,
+%     rulecolor=,
+%     language=tcl,
+%         basicstyle=\small,
+%         upquote=true,
+%         aboveskip={1.5\baselineskip},
+%         columns=fixed,
+%         showstringspaces=false,
+%         extendedchars=true,
+%         breaklines=true,
+%         prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+%         frame=single,
+%         showtabs=false,
+%         showspaces=false,
+%         showstringspaces=false,
+%         identifierstyle=\ttfamily,
+%         keywordstyle=\color[rgb]{0,0,1},
+%         commentstyle=\color[rgb]{0.133,0.545,0.133},
+%         stringstyle=\color[rgb]{0.627,0.126,0.941},
+%         morekeywords={$ns}
+% }
+%   
+%   
+% \renewcommand{\lstlistingname}{Codefragment}
+%   
+%   
+%   
+% \begin{document}
+% \maketitle
+%   \vspace{-21pt}
+% \noindent
+% \textit{Kleine UDP stromen worden vaak gebruikt bij online computer games. De
+% throughput-karakteristieken voor een \emph{Tahoe TCP} connectie in parallel met
+% vele van deze UDP stromen toont een aantal verschillen met die van een
+% \emph{Reno TCP}. In dit verslag bespreken we de verschillen met behulp van plots
+% van de Throughput, het Congestion Window en de Slow Start Threshold.}
+%   
+%   
+% \begin{figure}[h]
+% \section{Tahoe TCP Implementatie}
+% \vspace{-5pt}
+% Eerst en vooral dient te worden opgemerkt dat UDP geen congestion control heeft.
+% Bij competitie neemt het UDP verkeer zoveel bandbreedte in als nodig. TCP heeft
+% wel congestion control om packet loss te vermijden. 
+% De hoeveelheid bandbreedte ingenomen door de 50 UDP streams is niet groot.
+%  Toch zijn er drops in de throughput van de TCP flow, zie figuur
+%  ~\ref{throughput_n1_tcp}. Dit komt door verloren pakketten en het congestion
+%  avoidance algoritme van TCP: bij het verloren gaan van pakketten verlaagt de
+%  throughput als gevolg van het dalen van het \textit{Congestion Window}.
+% De \textit{Window Size} van de TCP is voor deze simulatie op 80 gezet. Hierdoor
+% gaat de TCP connectie een grote bandbreedte innemen. De TCP connectie bezet bijna de volledige bufferruimte 
+% nog voor de UDP streams pakketten beginnen te sturen.
+%         \begin{center}
+%         \includegraphics[width=0.8\textwidth]{throughput_n1_tcp.png}
+%         \end{center}
+%         \vspace{-13pt}
+%         \caption{De throughput van de verschillende flows bij Tahoe TCP.}
+%         \label{throughput_n1_tcp}
+% \end{figure}
+% \clearpage
+%   
+% \noindent
+% Het TCP protocol voorziet minstens twee vensters voor de zender. Een daarvan is
+% het \textit{Congestion Window}. Dit is het aantal bytes dat op een ogenblik mag
+% aanwezig zijn (aan het verzenden zijn) doorheen een connectie. Bij packet loss wordt het
+% congestion window verlaagt. \\ \\
+% Er zijn twee fases: \textit{Slow Start} en \textit{Congestion Avoidance}. Bij
+% slow start (hoewel de naam anders doet vermoeden) zal het congestion venster
+% exponentieel stijgen. Bij congestion avoidance gebeurt dit lineair. De
+% \textit{Slow Start Threshold} is de grens tussen deze twee fasen.
+% Bij een packet loss wordt deze grenswaarde gelijk gesteld aan
+% de gehalveerde waarde van het congestion window, en het congestion window terug op 1 gezet. Zie figuur ~\ref{congw_tcp}.
+% Bij het ontvangen van drie opeenvolgende ACK's van eenzelfde pakket wordt het
+% pakket verloren verondersteld. Dan gebeurt een \textit{Fast Retransmission},
+% waardoor de tijd dat de zender moet wachten voor het retransmitten bij een verloren segment gereduceerd wordt.
+%   
+% %
+% %Op figuur~\ref{congw_tcp} zien we dat het \textit{Congestion Window} telkens op
+% %1 wordt gezet nadat er drops zijn gedetecteerd. Daarna zal dit venster opnieuw
+% % stijgen.
+% %Dit gebeurt volgens het 'Fast Retransmit' mechanisme, nl. het congestion window
+% % zal exponentieel stijgen tot de slow start threshold bereikt is, daarna zal hij nog lineair toenemen tot de volgende drop. \\
+% %De slow start threshold is dus een grens in het slow start algoritme. Deze
+% % grens wordt bij een drop gelijk gesteld aan de helft van de \textit{Congestion Window}. Bij de eerste drop werd de threshold gelijk gesteld aan de
+% %helft van de vorige waarde. \\
+% \begin{figure}[h]
+%         \begin{center}
+%         \includegraphics[width=0.8\textwidth]{congw_ssth_tcp.png}
+%         \end{center}
+%         \caption{Congestion window en slow start threshold bij Tahoe TCP.}
+%         \label{congw_tcp}
+% \end{figure}
+%   
+% \clearpage
+% \section{Reno TCP Implementatie}
+% Bij Reno moet onderscheid gemaakt worden tussen verschillende wijzen van packet
+% loss. 
+% Bij het ontvangen van drie dezelfde ACK's (bevestigingen) van eenzelfde
+% pakket wordt het pakket verloren verondersteld. Dan zal het congestion
+% window gelijk gesteld worden aan de slow start threshold of wordt het dus
+% gehalveerd. Er gebeurt een fast retransmission net als bij Tahoe TCP. Vervolgens
+% gebeurt \textit{Fast Recovery}. Hierin zal TCP het missende pakketje
+% heruitzenden en wachten op een bevestiging van het gehele transmit venster voordat terug wordt overgegaan naar congestion avoidance.\\
+% Wanneer een ACK een time out heeft, zal (net zoals bij Tahoe) overgegaan worden
+% op \textit{Slow Start}. Op figuur ~\ref{congw_reno} bij ongeveer 17 seconden en bij 23 seconden zien we dit gebeuren. Het congestion window wordt dan op 1
+% gezet en de slow start threshold wordt (in tegenstelling tot de werking bij
+% Tahoe) gehalveerd.
+% \\
+% Deze vorm van TCP vermijdt dus \textit{Slow Start}, behalve bij de opstart en
+% bij een timeout van een bevestiging.
+% \\
+% \begin{figure}[h]
+%         \begin{center}
+%         \includegraphics[width=0.8\textwidth]{cong_ssth_reno.png}
+%         \end{center}
+%         \caption{Congestion window en slow start threshold bij Reno TCP.}
+%         \label{congw_reno}
+% \end{figure}
+%   
+%   
+%   
+% \clearpage
+% \noindent
+% Op figuur ~\ref{throughput_n1_reno} zien we dat de throughput drops nu
+% veel minder diep zijn dan bij de Tahoe TCP implementatie.
+% Dit heeft te maken met het besproken \textit{Fast Recovery} mechanisme van Reno
+% TCP, waarbij de pakketstroom niet wordt geleegd (zoals bij Tahoe TCP) maar wel
+% gereduceerd. (zie boven) \\
+% \begin{figure}[h]
+%         \begin{center}
+%         \includegraphics[width=0.8\textwidth]{throughput_n1_reno.png}
+%         \end{center}
+%         \caption{De throughput van de verschillende flows bij Reno TCP.}
+%         \label{throughput_n1_reno}
+%          
+%         \noindent
+% Tweemaal zakt de throughput volledig tot 0. Dit gebeurt bij het te
+% laat ontvangen van een acknowledgement, een 'timeout'. Dan daalt het congestion
+% window tot op 1 zoals eerder besproken.
+% \end{figure}
+%   
+%   
+%   
+%   
+% \clearpage
+% \section{Appendix: TCL-code}
+% \begin{lstlisting}
+% #Create a simulator object:
+% set ns [new Simulator]
+%   
+% #Kleuren van flows:
+% $ns color 1 Blue
+% $ns color 2 Red
+%   
+% #Nodige bestanden openen:
+% set tracefile1 [open /tmp/wimfred/out_oef2b.tr w]
+%   
+% set filebursts_tcp [open filebursts_tcp w]
+% set filecwnd_tcp [open filecwnd_tcp w]
+% set filessth_tcp [open filessth_tcp w]
+% $ns trace-all $tracefile1
+%   
+% set nf [open /tmp/wimfred/out_oef2b.nam w]
+% $ns namtrace-all $nf
+%   
+% #Define a 'finish' procedure:
+% proc finish {} {
+%         global ns nf tracefile1
+%         $ns flush-trace
+%     close $tracefile1
+%         #Close the NAM trace file
+%         close $nf
+%         #Execute NAM on the trace file
+%         exec nam /tmp/wimfred/out_oef2b.nam &
+%         exit 0
+% }
+%   
+% #Create four nodes:
+% set n0 [$ns node]
+% set n1 [$ns node]
+% set n2 [$ns node]
+% set n3 [$ns node]
+% set n4 [$ns node]
+% set n5 [$ns node]
+%   
+% #Create links between the nodes:
+% $ns duplex-link $n2 $n0 10Mb 10ms DropTail
+% $ns duplex-link $n4 $n0 10Mb 10ms DropTail
+% $ns duplex-link $n0 $n1 10Mb 10ms DropTail
+% $ns duplex-link $n1 $n3 10Mb 10ms DropTail
+% $ns duplex-link $n1 $n5 10Mb 10ms DropTail
+%   
+% #Queue groottes instellen:
+% $ns queue-limit $n0 $n1 20
+% $ns queue-limit $n4 $n0 2000
+%   
+% #Give node position (for NAM):
+% $ns duplex-link-op $n2 $n0 orient right-down
+% $ns duplex-link-op $n4 $n0 orient right-up
+% $ns duplex-link-op $n0 $n1 orient right
+% $ns duplex-link-op $n1 $n3 orient right-up
+% $ns duplex-link-op $n1 $n5 orient right-down
+%   
+% #Random generator aanmaken:
+% set rng1 [new RNG]
+% $rng1 seed 0
+%   
+% #Exponentieel verdeelde delay:
+% set Delay [new RandomVariable/Exponential]
+% $Delay set avg_ 0.03
+% $Delay use-rng $rng1
+%   
+% #50 UDP connections aanmaken:
+%     for {set j 0} {$j<=49} {incr j} {
+% #UDP connectie:
+%         set udp($j) [new Agent/UDP]
+%         $ns attach-agent $n4 $udp($j)
+%         set null($j) [new Agent/Null]
+%         $ns attach-agent $n5 $null($j)
+%         $ns connect $udp($j) $null($j)
+%         $udp($j) set fid_ 2
+%          
+% #CBR connectie:
+%         set cbr($j) [new Application/Traffic/CBR]
+%         $cbr($j) attach-agent $udp($j)
+%         $cbr($j) set type_ CBR
+%         $cbr($j) set packetSize_ 400b
+%         $cbr($j) set interval_ 100ms
+%         $cbr($j) set random_ false
+%     }
+%   
+%   
+% #Start van CBR'en schedulen:
+% set t 5.0
+% for {set j 0} {$j<=49} {incr j} {
+%     set t [expr $t + [$Delay value]]
+%     $ns at $t "$cbr($j) start"
+%     puts $filebursts_tcp "$j $t"
+% }
+%   
+% #TCP connectie:
+% set tcp1 [new Agent/TCP]
+% $ns attach-agent $n2 $tcp1
+% set sink120 [new Agent/TCPSink]
+% $ns attach-agent $n3 $sink120
+% $ns connect $tcp1 $sink120
+% $tcp1 set fid_ 1
+% $tcp1 set window_ 80
+%   
+% #FTP over TCP:
+% set ftp1 [new Application/FTP]
+% $ftp1 attach-agent $tcp1
+%   
+% #plotWindow procedure:
+% proc plotWindow {tcpSource} {
+%     global ns tcp1 filecwnd_tcp filessth_tcp
+%   
+%     set time 0.1
+%     set now [$ns now]
+%     set cwnd [$tcpSource set cwnd_]
+%     set ssth [$tcpSource set ssthresh_]
+%     puts $filecwnd_tcp "$now $cwnd"
+%     puts $filessth_tcp "$now $ssth"
+% $ns at [expr $now+$time] "plotWindow $tcpSource"}
+%   
+% #Procedure en ftp starten/stoppen:
+% $ns at 0.1 "plotWindow $tcp1"
+%   
+% $ns at 0.1 "$ftp1 start"
+%   
+% $ns at 24.7 "$ftp1 stop"
+%   
+% $ns at 25.0 "finish"
+%   
+% #Run the simulation
+% $ns run
+% \end{lstlisting}
+% \end{document}
