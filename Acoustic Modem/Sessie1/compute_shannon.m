@@ -21,7 +21,7 @@ for i=1:N
     Pn(i,1) = mean(Pr(i,:));
 end
 
-sig = sin(2*pi*400*t);
+sig = ; % ruis want willen alle freqs testen
 [simin,nbsecs,fs] = initparams(sig,Fs);
 sim('recplay');
 out=simout.signals.values;
@@ -32,6 +32,8 @@ for i=1:N
     Ps0(i,1) = mean(P0(i,:));
 end
 Ps = Ps0-Pn;
+for i=1:size(Ps) %negatieve waarden op 0 zetten
+    
 
 
 
