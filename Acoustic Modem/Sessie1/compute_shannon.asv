@@ -1,7 +1,7 @@
 Fs = 16000;
 B = Fs/2;
 DFTsize = 512;
-N = DFTsize/2; % ??
+N = DFTsize/2;
 
 t = zeros(Fs,1);
 for i=1:Fs
@@ -21,7 +21,7 @@ for i=1:N
     Pn(i,1) = mean(Pr(i,:));
 end
 
-sig = sin(2*pi*400*t);
+sig = randn(2*Fs, 1); % ruis want willen alle freqs testen
 [simin,nbsecs,fs] = initparams(sig,Fs);
 sim('recplay');
 out=simout.signals.values;
@@ -32,8 +32,11 @@ for i=1:N
     Ps0(i,1) = mean(P0(i,:));
 end
 Ps = Ps0-Pn;
+for i=1:size(Ps) %negatieve waarden op 0 zetten
+    
 
 
 
 
-C = Fs/(2*N) * symsum(log2(1+(Ps/Pn)),k,1,N)
+Cv = log2(1+(Ps./Pn));
+C = Fs/(2*N) * sum(Cv);

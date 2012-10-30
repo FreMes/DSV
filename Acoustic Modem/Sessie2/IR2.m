@@ -10,7 +10,7 @@ x = toeplitz(u(1:10000),zeros(100,1));
 sim('recplay');
 out=simout.signals.values;    
 
-blub = find(out>0.35,1000)
+blub = find(out>0.02,1000)
 ind = find(blub>32000,1)
 index = blub(ind,1)
 y = out(index-20:index+9979);
