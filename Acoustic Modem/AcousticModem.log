@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 OCT 2012 17:52
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 OCT 2012 23:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -68,7 +68,7 @@ sticModem.aux) )
 Here is how much of TeX's memory you used:
  291 strings out of 493488
  3404 string characters out of 3141326
- 50432 words of memory out of 3000000
+ 52432 words of memory out of 3000000
  3669 multiletter control sequences out of 15000+200000
  7580 words of font info for 27 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -78,7 +78,7 @@ Here is how much of TeX's memory you used:
 cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr17.pfb>
-Output written on AcousticModem.pdf (1 page, 45711 bytes).
+Output written on AcousticModem.pdf (1 page, 56022 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
