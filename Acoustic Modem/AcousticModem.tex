@@ -1,8 +1,7 @@
-%%This is a very basic article template.
-%%There is just one section and two subsections.
-\documentclass[a4paper,11pt]{article}
 
-\usepackage{titling}
+\documentclass[a4paper,11pt]{article}
+\usepackage{alltt}
+% \usepackage{titling}
 \newcommand{\subtitle}[1]{
   \posttitle{
     \par\end{center}
@@ -11,50 +10,97 @@
 }
 
 \title{ Acoustic Modem Project:}
-\subtitle{Audio Playback, recording and analysis}
+% \subtitle{Audio Playback, recording and analysis}
 \author{Frederic Mes, Wim Marynissen}
  \date{\today}
 
 
 \begin{document}
 \maketitle
-
-\section{Exercise 1: Audio playback/recording}
+\section{Session 1}
+\subsection{Exercise 1: Audio playback/recording}
 Done.
 
 %\subsection{Another subtitle}
 
-\section{Exercise 2: Time-frequency analysis of recorded signals}
-
-2.	There's some noise besides the 400Hz frequency.
-
-3.	The DFT size determines the time interval of which a spectrum is calculated.
-	(+ opgeschreven uitleg)
+\subsection{Exercise 2: Time-frequency analysis of recorded signals}
+\begin{alltt}
+	2.	There's some noise besides the 400Hz frequency.
 	
-4.	There are other frequencies present. These are harmonic frequencies, they are
-multiples of the original frequency.
+	3.	The DFT size determines the time interval of which a spectrum is calculated.
+		(+ opgeschreven uitleg)
+		
+	4.	There are other frequencies present. These are harmonic frequencies, they are
+	multiples of the original frequency.
+	
+	5.	In the spectrogram of the transmitted signal, there's a DC component. But in
+	the recorded signal this DC component has faded. 
+	
+	6.	Clipping amplifies some of the harmonic frequencies. This could be harmful
+	for the acoustic modem for harmonic signals could interfere with the correct
+	signal. (?)
+	
+	8.	?
+	
+	9. It shows which frequency range is let trough by the channel.
+	
+	10. It doesn't change over time. This is relevant because we want a
+	time-invariant system.
+	
+	11. There's more background noise and a weaker signal. (?)
+\end{alltt}
 
-5.	In the spectrogram of the transmitted signal, there's a DC component. But in
-the recorded signal this DC component has faded. 
-
-6.	Clipping amplifies some of the harmonic frequencies. This could be harmful
-for the acoustic modem for harmonic signals could interfere with the correct
-signal. (?)
-
-8.	?
-
-9. It shows which frequency range is let trough by the channel.
-
-10. It doesn't change over time. This is relevant because we want a
-time-invariant system.
-
-11. There's more background noise and a weaker signal. (?)
-
-\section{Exercise 3: Time-frequency analysis of recorded signals}
-
+\subsection{Exercise 3: Time-frequency analysis of recorded signals}
+\begin{alltt}
 1. Schatting dmv ruis: 500-6500 Hz,
 
 4. The maximum data transfer rate for error-free transmission, in bits per
 second.
+\end{alltt}
+\section{Session 2}
+\subsection{Exercise 2-1}
+\begin{alltt}
+1.	
 
+2.	The estimated IR contains approx. 100 samples
+
+3.	The IR length would be bigger
+
+4.	
+
+5.	They do look more or less the same.
+	Explenation: white noise has a constant PSD so the channel transferfunction is
+	multiplied with a constant.
+
+\end{alltt}
+\subsection{Exercise 2-2}
+\begin{alltt}
+1.
+
+
+
+2.	
+
+3.
+
+4.
+
+5.
+
+6.
+\end{alltt}
+\subsection{Exercise 2-3}
+\begin{alltt}
+1.
+
+2.	
+
+3.
+
+4.
+
+5.
+
+6.
+\end{alltt}
 \end{document}
