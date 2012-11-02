@@ -12,8 +12,8 @@ stopfilter = fir1(100,Wn,'stop');
 % plot(20*log(abs(fft(stopfilter))))
 
 u_ = conv(u,stopfilter);
- figure(1)
- plot(20*log(abs(fft(u_))))
+%  figure(1)
+%  plot(20*log(abs(fft(u_))))
 
 x = toeplitz(u_(1:10000),zeros(100,1));
     
