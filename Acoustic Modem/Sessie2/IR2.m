@@ -3,9 +3,9 @@ Fs = 16000;
 %u = randn(2*Fs, 1);
 u = rand(2*Fs, 1)-0.5;
 
-x = toeplitz(u(1:10000),zeros(100,1));
+x = toeplitz(u,zeros(100,1));
     
-[simin,nbsecs,fs] = initparams(u(1:10000),Fs);
+[simin,nbsecs,fs] = initparams(u,Fs);
 
 sim('recplay');
 out=simout.signals.values;    
@@ -13,7 +13,7 @@ out=simout.signals.values;
 blub = find(out>0.02,1000)
 ind = find(blub>32000,1)
 index = blub(ind,1)
-y = out(index-20:index+9979);
+y = out(index-20:index+31979);
 h = x\y;
 
 figure() %vraag 2
