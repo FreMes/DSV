@@ -22,7 +22,7 @@ out=simout.signals.values;
 sound(out);
 
 scrsz = get(0,'ScreenSize');
-figure('Name','White Noise - Spectrogram','Position',[2 scrsz(4)/2 scrsz(3)/2  scrsz(4)/2])
+figure('Name','White Noise - Spectrogram','Position',[1 scrsz(4)/2 scrsz(3)/2  scrsz(4)/2])
 
 subplot(2,1,1);
 [S1,F1,T1,P1] = spectrogram(simin(:,2),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis'); %vensterlengte, overlap, DFT size(gelijk aan vensterlengte)

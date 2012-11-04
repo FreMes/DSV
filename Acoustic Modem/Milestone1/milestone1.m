@@ -17,7 +17,8 @@ out=simout.signals.values;
 
 sound(out);
 
-figure(1);
+scrsz = get(0,'ScreenSize');
+figure('Name','White Noise - Spectrogram','OuterPosition',[1 scrsz(4)/2 scrsz(3)/2  scrsz(4)/2]);
 
 subplot(2,1,1);
 [S1,F1,T1,P1] = spectrogram(simin(:,2),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
@@ -34,7 +35,7 @@ set(gca,'YDir','normal');
 xlabel('Time (seconds)');
 ylabel('Frequency');
 
-figure(2);
+figure('Name','White Noise - PSD','OuterPosition',[scrsz(3)/2 scrsz(4)/2 scrsz(3)/2  scrsz(4)/2])
 subplot(2,1,1);
 semilogy(F1,mean(P1,2)); 
 xlabel('Frequency');
@@ -55,7 +56,8 @@ index = overthreshold(ind,1)
 y = out(index-20:index+31979);
 h = x\y;
 
-figure(3) %vraag 2
+figure('Name','IR2 - Time&Freq Response','OuterPosition',[1 1 scrsz(3)/2  scrsz(4)/2])
+ %vraag 2
 subplot(2,1,1);
 plot(h,'DisplayName','h','YDataSource','h');
 xlabel('Time (samples)');
@@ -80,7 +82,7 @@ d(halflength+1,1) = 1;
 sim('recplay');
 out=simout.signals.values;    
 
-figure(4);
+figure('Name','IR1 - Time&Freq Response','OuterPosition',[scrsz(3)/2 1 scrsz(3)/2  scrsz(4)/2])
 
 subplot(2,1,1);
 index = find(out==(max(max(out))))
