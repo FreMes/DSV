@@ -1,0 +1,8 @@
+length = 100;
+
+randseq = randint(length,1,[1,0]);
+
+
+
+
+

@@ -26,8 +26,7 @@ sig = randn(2*Fs, 1); % ruis want willen alle freqs testen
 sim('recplay');
 out2=simout.signals.values;
 [S0,F0,T0,P0] = spectrogram(out2(16000:end),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
-figure()
-spectrogram(out2(16000:end),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis')
+
 Ps0 = zeros(1:N,1);
 for i=1:N
     Ps0(i,1) = mean(P0(i,:));
