@@ -50,7 +50,7 @@ ylabel('PSD');
 %   IR2:
 x = toeplitz(sig,zeros(100,1));
 
-overthreshold = find(out>0.05,1000)  %good threshold value despends on the amount of noise in the room
+overthreshold = find(out>0.1,1000)  %good threshold value despends on the amount of noise in the room
 ind = find(overthreshold>32000,1)
 index = overthreshold(ind,1)
 y = out(index-20:index+31979);
@@ -64,7 +64,7 @@ xlabel('Time (samples)');
 ylabel('IR response');
 subplot(2,1,2);
 plot(20*log(abs(fft(h))));
-xlabel('Relative Frequency');
+xlabel('Frequency (relative to 100*Fs)');
 ylabel('Frequency response');
 
 save('IRest.mat', 'h');
@@ -85,15 +85,15 @@ out2=simout.signals.values;
 figure('Name','IR1 - Time&Freq Response','OuterPosition',[scrsz(3)/2 1 scrsz(3)/2  scrsz(4)/2])
 
 subplot(2,1,1);
-index = find(out2==(max(max(out2))))
+index = find(out2==(max(max(out))))
 
 out(index-20:index+80)
-plot(out2(index-20:index+80),'DisplayName','h','YDataSource','h');
+plot(out(index-20:index+80),'DisplayName','h','YDataSource','h');
 xlabel('Time (samples)');
 ylabel('IR response');
 subplot(2,1,2);
 range = out2(index-20:index+80);
 plot(20*log(abs(fft(range))));
-xlabel('Relative frequency');
+xlabel('Frequency (relative to 100*Fs)');
 ylabel('Frequency response');
 

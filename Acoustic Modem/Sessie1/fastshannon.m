@@ -10,10 +10,10 @@ end
 
 
 sig = zeros(2*Fs,1);
-[simin,nbsecs,fs] = initparams(sig,Fs);
+[simin,nbsecs,fs] = initparams2(sig,Fs);
 sim('recplay');
 out1=simout.signals.values;
-[Sr,Fr,Tr,Pr] = spectrogram(out1(20000:36000),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
+[Sr,Fr,Tr,Pr] = spectrogram(out1(16000:end),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
 spectrogram(out1,DFTsize,DFTsize/2,DFTsize,Fs,'yaxis')
 Pn = zeros(1:N,1);
 for i=1:N
@@ -21,10 +21,10 @@ for i=1:N
 end
 
 sig = randn(2*Fs, 1); % ruis want willen alle freqs testen
-[simin,nbsecs,fs] = initparams(sig,Fs);
+[simin,nbsecs,fs] = initparams2(sig,Fs);
 sim('recplay');
 out2=simout.signals.values;
-[S0,F0,T0,P0] = spectrogram(out2(40000:56000),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
+[S0,F0,T0,P0] = spectrogram(out2(16000:end),DFTsize,DFTsize/2,DFTsize,Fs,'yaxis');
 spectrogram(out2,DFTsize,DFTsize/2,DFTsize,Fs,'yaxis')
 
 Ps0 = zeros(1:N,1);
