@@ -1,4 +1,4 @@
-function totalber = ofdm_mod(N,M,Nl,L,SNR)
+% function y = ofdm_mod(N,M,Nl,L)
 N = 500; M = 16; Nl = 3; L = 2;
 if( mod(N,2) ~= 0 )
     error('N must be even');
@@ -25,7 +25,7 @@ end
         i = i + 1;
     end
     
-     sentserial_withnoise = awgn(sentserial,SNR,'measured');    %adding noise (part 5)
+     sentserial_withnoise = awgn(sentserial,5,'measured');    %adding noise (part 5)
     
     receivedparallel = zeros(N,Nl);
     i=1;
@@ -45,4 +45,4 @@ end
     end
     totalber = sum(ber_ofdm)
     
-end
+% end

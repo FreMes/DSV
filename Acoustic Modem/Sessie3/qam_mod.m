@@ -1,4 +1,4 @@
-function y = qam_mod(x, M)
+function qamsymbols = qam_mod(x, M)
 length = size(x,1);
 wordlength = log2(M);
 % % if( length/(M/2) ~= floor(length/(M/2)) )
@@ -27,7 +27,7 @@ wordlength = log2(M);
 % qam
 
 modulator = modem.qammod('M', M, 'InputType', 'Bit');
-y = modulate (modulator,x)
+qamsymbols = modulate (modulator,x);
 
 end
 
