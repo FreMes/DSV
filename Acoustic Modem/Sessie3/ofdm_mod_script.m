@@ -1,5 +1,5 @@
 % function y = ofdm_mod(N,M,Nl,L)
-N = 500; M = 16; Nl = 3; L = 2;
+N = 10; M = 16; Nl = 3; L = 2;
 if( mod(N,2) ~= 0 )
     error('N must be even');
 end

@@ -1,13 +1,14 @@
-function sentserial = ofdm_mod(input,N,M,Nl,L)
+function sentserial = ofdm_mod(qamsignal,L)
+    [n,Nl] = size(qamsignal);
+    N = (n + 1) *2;
+    L = length(qamStream)*2 + 2
+        
     packet = zeros(N,Nl);
-    
-    for i = 1:Nl                                            % QAM modulation
-        qam = qam_mod(input(:,i),M);
-
-        packet(2:N/2,i) = qam;
-        packet(N/2+2:N,i) = conj(flipud(qam));
+    for i = 1:Nl                                            % packet construction
+        packet(2:N/2,i) = qamsignal(:,i);
+        packet(N/2+2:N,i) = conj(flipud(qamsignal(:,i)));
     end
-    
+
     signal = ifft(packet); % IFFT
    
     sentserial = zeros((N+L)*Nl,1); 
