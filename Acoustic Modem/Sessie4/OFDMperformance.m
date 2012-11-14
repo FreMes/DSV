@@ -1,7 +1,7 @@
 BER_SNR = zeros(10,1);
 i=1;
 for i=1:10
-    BER_SNR(i) = ofdm_experiment(10,16,5,5,i*2);
+    BER_SNR(i) = ofdm_experiment(1000,16,5,5,i*2);
 end
 
 figure(1);
