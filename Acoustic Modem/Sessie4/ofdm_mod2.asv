@@ -1,4 +1,4 @@
-function sentserial = ofdm_mod(qamsignal,N,L_CP,P)
+function sentserial = ofdm_mod2(qamsignal,N,L_CP,P)
     
     packet = zeros(N,P);
     for i = 1:P                                            % 

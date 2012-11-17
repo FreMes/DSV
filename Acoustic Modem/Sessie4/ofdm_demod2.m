@@ -1,4 +1,4 @@
-function received_qam = ofdm_demod(input,N,P,L_CP,H)
+function received_qam = ofdm_demod2(input,N,P,L_CP,H)
     
     receivedparallel = zeros(N,P);
 %     i=1;

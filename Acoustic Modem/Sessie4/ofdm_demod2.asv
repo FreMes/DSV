@@ -1,4 +1,4 @@
-function received_qam = ofdm_demod(input,N,P,L_CP,H)
+function received_qam = ofdm_demod2(input,N,P,L_CP)
     
     receivedparallel = zeros(N,P);
 %     i=1;
@@ -6,16 +6,16 @@ function received_qam = ofdm_demod(input,N,P,L_CP,H)
 %         receivedparallel(:,i) = input(i*(N+L_CP)-(N+L_CP)+1+L_CP:i*(N+L_CP));
 %         i = i + 1;
 %     end
-    receivedparallel = reshape(input,N + L_CP,P);
-    receivedparallelnocp = receivedparallel(L_CP+1:N+L_CP,:);
+    receivedparallel = reshape(input,N,P);
+    receivedparalllelnocp = receivedparallel(L_CP+1:N+L_CP,:);
 
-    packet_received = fft(receivedparallelnocp); %FFT
+    packet_received = fft(receivedparallel); %FFT
     
-    receivedqams = zeros(N,P);
+    receivedqams = zeros(N/2,P);
     i=1;
     
     while i<= P
-        receivedqams(:,i) = packet_received(1:N,i)./H;
+        receivedqams(:,i) = packet_received(1:N/2,i);
         i=i+1;
     end
 
