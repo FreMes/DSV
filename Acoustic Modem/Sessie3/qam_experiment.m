@@ -1,10 +1,11 @@
 length = 32;
 M = 16;
+SNR = 5;
 randseq = randint(length,1,[1,0]);
 
 qam = qam_mod(randseq,M);
 % qam_norm = qam/sqrt(10);
-qamnoise = awgn(qam,5,'measured'); %ruis toevoegen
+qamnoise = awgn(qam,SNR,'measured'); %ruis toevoegen
 
 % Create modulator
 hMod = modem.qammod(M);

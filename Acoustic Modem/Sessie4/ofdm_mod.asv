@@ -1,22 +1,20 @@
-function sentserial = ofdm_mod(qamsignal,L)
-    [n,Nl] = size(qamsignal);
-    N = (n + 1) *2;
-    L = length(qamStream)*2 + 2
-        
-    packet = zeros(N,Nl);
-    for i = 1:Nl                                            % packet construction
-        packet(2:N/2,i) = qamsignal(:,i);
-        packet(N/2+2:N,i) = conj(flipud(qamsignal(:,i)));
-    end
-
-    signal = ifft(packet); % IFFT
-   
-    sentserial = zeros((N+L)*Nl,1); 
-    i=1;
-    while i <= Nl                          %parallel-serial + CP toevoegen
-        sentserial(i*(N+L)-(N+L)+1:i*(N+L)-(N+L)+L) = signal(end-L+1:end,i);
-        sentserial(i*(N+L)-(N+L)+1+L:i*(N+L))=signal(:,i);
-        i = i + 1;
+function sentserial = ofdm_mod(qamsignal,N,L_CP,P,goodFreqs)
+    P=floor(size(qamsignal,1)/(N/2-1));
+    nbGoodFreqs = length(goodFreqs);
+    
+    packet = zeros(N,P);
+    for i = 1:P                                            % 
+        packet(goodFreqs,i) = qamsignal(1+((nbGoodFreqs/2-1)*(i-1)):i*(nbGoodFreqs/2-1),1);
+        packet(N/2+2:N,i) = conj(flipud(packet(2:N/2,i)));
     end
     
+    signal = ifft(packet); % IFFT
+
+    
+    signalpluscp = zeros(N + L_CP,P); 
+
+    signalpluscp(1:L_CP,:) =  signal(end-L_CP+1:end,:);
+    signalpluscp(L_CP+1:N+L_CP,:) =  signal;
+    sentserial = reshape(signalpluscp,(N+L_CP)*P,1);
+
 end
