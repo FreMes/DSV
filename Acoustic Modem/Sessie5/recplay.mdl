@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.12"
+    ComputedModelVersion    "1.14"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,11 +25,11 @@ Model {
   Creator		  "abertran"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "bli"
+  LastModifiedBy	  "Mes"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Sep 07 09:07:27 2012"
-  RTWModifiedTimeStamp	  268909638
-  ModelVersionFormat	  "1.%<AutoIncrement:12>"
+  LastModifiedDate	  "Mon Nov 26 01:36:28 2012"
+  RTWModifiedTimeStamp	  275794503
+  ModelVersionFormat	  "1.%<AutoIncrement:14>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -572,8 +572,8 @@ Model {
 	PropName		"Components"
       }
       Name		      "Configuration"
-      CurrentDlgPage	      "Diagnostics/Compatibility"
-      ConfigPrmDlgPosition     [ 376, 120, 1304, 864 ] 
+      CurrentDlgPage	      "Diagnostics/Data Validity"
+      ConfigPrmDlgPosition     [ 368, 90, 1312, 872 ] 
     }
     PropName		    "ConfigurationSets"
   }

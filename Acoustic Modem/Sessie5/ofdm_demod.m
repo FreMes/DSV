@@ -1,22 +1,32 @@
-function [rxQamStream, estH] = ofdm_demod(Rx,N,h,P,Tx)  
+function [rxQamStream, estH] = ofdm_demod(Rx,N,L_CP,P,Tx,trainblock)  
 %           serial-parallel:
-    receivedparallel = reshape(Rx,N,P);
-    packet_received = fft(receivedparallel); %FFT
+    receivedparallel = reshape(Rx,N + L_CP,P);
+    receivedparallelnocp = receivedparallel(L_CP+1:N+L_CP,:);
 
-%     %Channel Estimation
-%     for i = 0 : N/2-1
-%        %kkw 
-%     end    
-%     estH = H;
-    x = toeplitz(Tx,zeros(length(h),1));  %Tx volgt uit trainblock dus het is "based on trainblock"
-    esth = x\Rx;
-    estH = fft(esth,N);
+
+    packet_received = fft(receivedparallelnocp); %FFT
+
+    packetsserial = reshape(packet_received,N*P,1);
     
-    packet_received(1:N,1)
+    diagonaltrain = diag([1.66533453693773e-16;trainblock;-1.66533453693773e-16;conj(flipud(trainblock))]);
+    X = zeros(100*N,N);
+    for i = 1:100
+        X(i*N-N+1:i*N,1:N) = diagonaltrain;
+    end
+    estH = X\packetsserial; 
+    size(estH)
+    figure()
+   plot(20*log(abs(estH)));
+
+%   Channel Estimation in time domain:
+%    x = toeplitz(Tx,zeros(100,1));  
+%    esth = x\Rx;
+%    estH = fft(esth,N);
+    
     packet_scaled = zeros(N,P);
     i=1;
     while i<= P
-        packet_scaled(:,i) = packet_received(1:N,i)./estH;
+        packet_scaled(:,i) = packet_received(:,i)./estH;
         i=i+1;
     end
     size(packet_scaled)
