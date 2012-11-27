@@ -1,9 +1,9 @@
-function [out_aligned] = alignIO(out,threshold)
-    ind_pulse = find(out>threshold,10000)
-    index = find(ind_pulse>45000,1)
-    out_index = ind_pulse(index,1)
+function [out_aligned] = alignIO(out,threshold,tSync)
+    ind_pulse = find(out>threshold,100);
+    index = find(ind_pulse>30000,1);
+    out_index = ind_pulse(index,1);
     
-    out_aligned = out(out_index-20:end);
+    out_aligned = out(out_index-20+tSync:end);
 end
 
  

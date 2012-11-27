@@ -8,15 +8,12 @@ function [rxQamStream, estH] = ofdm_demod(Rx,N,L_CP,P,Tx,trainblock)
 
     packetsserial = reshape(packet_received,N*P,1);
     
-    diagonaltrain = diag([1.66533453693773e-16;trainblock;-1.66533453693773e-16;conj(flipud(trainblock))]);
+    diagonaltrain = diag([0;trainblock;0;conj(flipud(trainblock))]);
     X = zeros(100*N,N);
     for i = 1:100
         X(i*N-N+1:i*N,1:N) = diagonaltrain;
     end
     estH = X\packetsserial; 
-    size(estH)
-    figure()
-   plot(20*log(abs(estH)));
 
 %   Channel Estimation in time domain:
 %    x = toeplitz(Tx,zeros(100,1));  
@@ -29,7 +26,6 @@ function [rxQamStream, estH] = ofdm_demod(Rx,N,L_CP,P,Tx,trainblock)
         packet_scaled(:,i) = packet_received(:,i)./estH;
         i=i+1;
     end
-    size(packet_scaled)
     received = packet_scaled(2:N/2,:);
     rxQamStream = reshape(received,(N/2-1)*P,1);
     
