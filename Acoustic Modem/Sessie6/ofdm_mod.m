@@ -1,0 +1,30 @@
+function sentserial = ofdm_mod(qamStream,trainblock,N,Ld,Lt,L_CP,P,bestTones)
+    NbOfTones = length(bestTones);
+    packett = zeros(N,Lt);
+    packetd = zeros(N,Ld);
+    totalPacket = zeros(N,P+(P/Ld)*Lt);
+    j=1;
+    k=1;
+    while(j < P+(P/Ld)*Lt-1)
+        for i = 1:Lt   
+            packett(2:N/2,i) = trainblock;
+            packett(N/2+2:N,i) = conj(flipud(trainblock));
+        end
+        totalPacket(:,j:j+Lt-1) = packett;
+        j = j + Lt;
+        for i = 1:Ld   
+            packetd(bestTones,i) = qamStream(1+(NbOfTones*((k+i-1)-1)):(k+i-1)*NbOfTones,1);
+            packetd(N/2+2:N,i) = conj(flipud(packetd(2:N/2,i)));
+        end
+        totalPacket(:,j:j+Ld-1) = packetd;
+        j = j + Ld;
+        k = k + Ld;
+    end
+    signal = ifft(totalPacket,N); % IFFT  
+
+    signalpluscp = zeros(N + L_CP,P+(P/Ld)*Lt); 
+
+    signalpluscp(1:L_CP,:) =  signal(end-L_CP+1:end,:);
+    signalpluscp(L_CP+1:N+L_CP,:) =  signal;
+    sentserial = reshape(signalpluscp,(N+L_CP)*(P+(P/Ld)*Lt),1);
+end
