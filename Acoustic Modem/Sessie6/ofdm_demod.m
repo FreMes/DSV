@@ -24,7 +24,7 @@ function [rxQamStream, channel_est] = ofdm_demod(Rx,N,L_CP,Ld,Lt,Tx,trainblock,P
 %             estH = Y./[1;trainblock;1;conj(flipud(trainblock))]; 
             
             trainframe = [1;trainblock;1;conj(flipud(trainblock))];
-            trainframes = repmat(trainframe,1,Lt)
+            trainframes = repmat(trainframe,1,Lt);
             estHs = packett./trainframes;
             estH = mean(estHs,2);
 

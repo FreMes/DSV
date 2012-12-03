@@ -31,14 +31,14 @@ function [rxQamStream, channel_est] = ofdm_demod_pilots2(Rx,N,L_CP,trainblock,P)
 %     estH1 = mean(packett(:,200:250),2)./[trainblock;conj(flipud(trainblock))];
 %     figure()
 %     plot(20*log(abs(estH1)));
-%     diff = estH1-estH(:,1)
+     diff = estH1-estH(:,1);
 %     figure()
 %     plot(abs(diff));
 %     figure()
 %     plot(20*log(abs(diff)));
 %     estH2 = mean(packett(:,1:50),2)./[trainblock;conj(flipud(trainblock))]; 
 %     estH(:,P/2+1:P) = repmat(estH2,1,P/2);    
-%     estH = estH + repmat(diff,1,P);
+     estH = estH + repmat(diff,1,P);
     
     
     channel_est_pilots = zeros(N,P);
