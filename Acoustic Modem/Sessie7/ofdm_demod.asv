@@ -1,0 +1,22 @@
+function rxQamStream = ofdm_demod(Rx,N,L_CP,Lt,Ld,trainblock,goodFreqs)  
+%           serial-parallel:
+    receivedparallel = reshape(Rx,N + L_CP,Lt+Ld);
+    receivedparallelnocp = receivedparallel(L_CP+1:N+L_CP,:);
+
+
+    packet_received = fft(receivedparallelnocp); %FFT
+    
+    packett = packet_received(:,1:Lt);
+%             Y = mean(packett,2);          
+%             estH = Y./[1;trainblock;1;conj(flipud(trainblock))]; 
+    
+    packet_scaled = zeros(N,Ld);
+    i=1;
+    while i<= Ld
+        packet_scaled(:,i) = packet_received(:,Lt+i)./estH;
+        i=i+1;
+    end
+    received = packet_scaled(goodFreqs,:);
+    rxQamStream = reshape(received,(N/2-1)*Ld,1);
+    
+end

@@ -1,0 +1,56 @@
+function [rxQamStream, channel_est] = ofdm_demod(Rx,N,L_CP,Ld,Lt,Tx,trainblock,P,bestTones)  
+%           serial-parallel:
+    receivedparallel = reshape(Rx,N + L_CP,(P+(P/Ld)*Lt));
+    receivedparallelnocp = receivedparallel(L_CP+1:N+L_CP,:);
+
+    packet_received = fft(receivedparallelnocp,N); %FFT
+    
+    channel_est = zeros(N,(P/Ld));
+    totalPacket = zeros(N,P);
+    j=1;
+    k=1;
+    while(j < P+(P/Ld)*Lt-1)
+        packett = packet_received(:,j:j+Lt-1);
+        %   Channel estimation in freq domain:\
+            packetsserial = reshape(packett,N*Lt,1);
+            diagonaltrain = diag([0;trainblock;0;conj(flipud(trainblock))]);
+            X = zeros(Lt*N,N);
+            for i = 1:Lt
+                X(i*N-N+1:i*N,1:N) = diagonaltrain;
+            end
+            estH = X\packetsserial; 
+        
+%             Y = mean(packett,2);          
+%             estH = Y./[1;trainblock;1;conj(flipud(trainblock))];
+%             channel_est(:,(k-1)/Ld + 1) = estH; 
+            
+%             trainframe = [1;trainblock;1;conj(flipud(trainblock))];
+%             trainframes = repmat(trainframe,1,Lt)
+%             estHs = packett./trainframes;
+%             estH = mean(estHs,2);
+%             estHs(:,(k-1)/Ld + 1) = estH;
+
+        % %   Channel Estimation in time domain:
+        %    x = toeplitz(Tx,zeros(100,1));  
+        %    esth = x\Rx;
+        %    estH = fft(esth,N);
+        j = j + Lt;
+        
+        packetd = packet_received(:,j:j+Ld-1);
+        
+        packetd_scaled = zeros(N,Ld);
+        i=1;
+        while i<= Ld
+            packetd_scaled(:,i) = packetd(:,i)./estH;
+            i=i+1;
+        end
+        
+        totalPacket(:,k:k+Ld-1) = packetd_scaled;
+        j = j + Ld;
+        k = k + Ld;
+    end
+
+    received = totalPacket(bestTones,:);
+    rxQamStream = reshape(received,length(bestTones)*P,1);
+    
+end
