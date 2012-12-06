@@ -27,11 +27,6 @@ function [rxQamStream, channel_est] = ofdm_demod(Rx,N,L_CP,Ld,Lt,Tx,trainblock,P
             trainframes = repmat(trainframe,1,Lt);
             estHs = packett./trainframes;
             estH = mean(estHs,2);
-
-        % %   Channel Estimation in time domain:
-        %    x = toeplitz(Tx,zeros(100,1));  
-        %    esth = x\Rx;
-        %    estH = fft(esth,N);
         
         channel_est(:,(k-1)/Ld + 1) = estH; 
         j = j + Lt;

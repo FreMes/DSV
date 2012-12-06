@@ -1,6 +1,7 @@
 
 transmit_pic_onoff;
-  
+
+figure()  
 for i = 1:P/Ld
     bits = rxBitStream(1:i*Ld*NbOfTones*Nq);
     
@@ -10,8 +11,8 @@ for i = 1:P/Ld
         % Construct image from bitstream
     imageRx = bitstreamtoimage(bits, imageSize, bitsPerPixel);
     % Plot images
-    pause(1,76);       %send time
-    figure()
+    pause((N*(Ld+Lt))/Fs);       %send time
+    
     hold on;
     subplot(2,2,1); plot(real(ifft(channel_est(:,i),N)),'DisplayName','h','YDataSource','h'); xlim([0 100]); xlabel('Time (samples)'); ylabel('IR response');
     subplot(2,2,3); plot(20*log(abs(estH_goodfreqs))); ylim([-150 0]); xlim([0 256]); xlabel('Relative Frequency'); ylabel('dB');
