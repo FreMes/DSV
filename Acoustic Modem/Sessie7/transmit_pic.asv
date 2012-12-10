@@ -30,12 +30,15 @@
         newBitStream = [bitStream; zeros((NbOfTones*Nq)-rest,1)];
     end  
     
+    randBits = randint(length(newBitStream),1,[1,0]);
     % QAM modulation      
-    qamStream = qam_mod(newBitStream,M);
+    qamStream1 = qam_mod(randBits,M);
+    qamStream2 = qam_mod(newBitStream,M);
 %---OFDM modulation: alternation---%
     Ld = length(qamStream)/NbOfTones;
     P=Lt+Ld;
-      [Tx2] = ofdm_mod(qamStream2,N,Lt,Ld,L_CP,trainblock,goodFreqs);
+      Tx1 = ofdm_mod(qamStream1,N,0,Ld,L_CP,0,goodFreqs);
+      Tx2,packet = ofdm_mod(qamStream2,N,Lt,Ld,L_CP,trainblock,goodFreqs);
 
 %---Play signal---%
 

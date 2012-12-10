@@ -1,8 +1,10 @@
-function sentserial = ofdm_mod(input,N,Lt,Ld,L_CP,trainblock,goodFreqs)
+function [sentserial,packet] = ofdm_mod(input,N,Lt,Ld,L_CP,trainblock,goodFreqs)
     NbOfTones = length(goodFreqs);
-    packet = zeros(N,Lt+Ld);
-    packet(2:N/2,1:Lt) = repmat(trainblock,1,Lt);
-    packet(N/2+2:N,1:Lt) = conj(flipud(packet(2:N/2,1:Lt)));
+    packet = zeros(N,Lt+Ld); 
+    if(Lt ~= 0)
+        packet(2:N/2,1:Lt) = repmat(trainblock,1,Lt);
+        packet(N/2+2:N,1:Lt) = conj(flipud(packet(2:N/2,1:Lt)));
+    end
     for i = 1:Ld   
         i*NbOfTones
         packet(goodFreqs,Lt+i) = input(1+(NbOfTones*(i-1)):i*NbOfTones,1);

@@ -6,35 +6,47 @@
     L_CP = 120;
     SNR = 100;
     
-    Lt = 5;
-    Ld = 50;
     
+    l=1000
 %---QAM SYMBOL SEQ---%
 
-    bitStream = randint(1000*Nq,1,[1,0]); 
+    bitStream = randint(l*Nq,1,[1,0]); 
 
     Xk = qam_mod(bitStream, M);
-    
 %---Yk---%
 
-    Hk = 0.5 + 0.05*i;
+    Hk_1 = 0.5 + 0.05*i;
+%     freq = 1;
+%     t = zeros(l,1);
+%     for j=1:l
+%        t(j,1)= (1/l)*j;
+%     end
+%     sig = sin(2*pi*freq*t);
+%     Hk = repmat(Hk_1,l,1) + 0.01*sig;
+    Hk = repmat(Hk_1,l,1);
     Nk = 0.001+0.0005i;
-    Yk = Hk*Xk+repmat(Nk,1000,1);
+    Yk = Hk.*Xk;
     
 %---Yk---%
     
     W = zeros(1000,1);
-    W(1) = 1/Hk + 0.1;
+    W(1) = 1/conj(Hk(1))+0.01;
+%     W(1) = conj(1/Hk(1));
     mu = 0.01;
-    a=1;
-    for i=2:1000
-        W(i) = W(i-1) + mu/(a+conj(Yk(i))*Yk(i)) * Yk(i) * conj(Xk(i) - conj(W(i-1))*Yk(i));
+    a=10^-4;
+    
+    Xk_filt = zeros(l,1);
+    Xk_est = zeros(l,1);
+    for j=2:1000
+        Xk_filt(j) = conj(W(j-1))*Yk(j);
+        Xk_est(j) = qammod(qamdemod(Xk_filt(j),M),M);
+        W(j) = W(j-1) + mu/(a+conj(Yk(j))*Yk(j)) * Yk(j) * conj(Xk_est(j) - conj(W(j-1))*Yk(j));
     end
     
     figure()
     plot(20*log(abs(W)));
     figure()
-    plot(20*log(abs(W-repmat(Hk,1000,1))));
+    plot(abs(W-ones(l,1)./conj(Hk)));
    
     
 %     
