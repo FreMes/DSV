@@ -5,7 +5,7 @@
     Nq = log2(M);
     L_CP = 150;
     SNR = 100;
-    BWusage = 70;
+    BWusage = 50;
     
     Lt = 5;
 %---CREATE TRAINBLOCK---%
@@ -35,7 +35,7 @@
 %---OFDM modulation: alternation---%
     Ld = length(qamStream)/NbOfTones;
     P=Lt+Ld;
-      [Tx2] = ofdm_mod(qamStream2,N,Lt,Ld,L_CP,trainblock,goodFreqs);
+   [Tx,packet] = ofdm_mod(qamStream,N,Lt,Ld,L_CP,trainblock,goodFreqs);
 
 %---Play signal---%
 
@@ -50,7 +50,7 @@
     
 %---OFDM demod---%
 %     [rxQamStream,W] = ofdm_demod(Rx, N,M,L_CP,Lt,Ld,trainblock,goodFreqs);
-%------------------------------------------------------------------------------------------------<
+% ------------------------------------------------------------------------------------------------<
     receivedparallel = reshape(Rx,N + L_CP,Lt+Ld);
     receivedparallelnocp = receivedparallel(L_CP+1:N+L_CP,:);
 
@@ -70,7 +70,7 @@
      Y = packet_received(:,Lt+1:end);
 
     % NLMS:
-    mu = 0.1;
+    mu = 0.001;
     a=10^-4;
     
     X_filt = zeros(N,Ld);
@@ -88,9 +88,13 @@
     received = packet_scaled(goodFreqs,:);
     rxQamStream = reshape(received,length(goodFreqs)*Ld,1);
 %------------------------------------------------------------------------------------------------<
-    
     figure()
-    plot(20*log(abs(ifft(conj(1./W(:,1)),N))));
+    plot(Tx);
+    figure()
+    plot(Rx);
+    figure()
+    plot(abs(rxQamStream));
+%     plot(20*log(abs(ifft(1./conj(W(:,1)),N))));
 %     figure()
 %     plot(20*log(abs(1./W(:,5))));
 %     figure()
@@ -99,7 +103,7 @@
     rxBitStream = qam_demod(rxQamStream,M);
 
 %---BER---%
-    berTransmission = ber(newBitStream(1:length(rxBitStream)),rxBitStream);
+%     berTransmission = ber(newBitStream(1:length(rxBitStream)),rxBitStream);
 
  
 %---Image---%

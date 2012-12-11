@@ -38,7 +38,7 @@
 %---OFDM modulation: alternation---%
     Ld1 = length(qamStream1)/NbOfTones;
     Ld2 = length(qamStream2)/NbOfTones;
-    P=Lt+Ld;
+    P=Lt+Ld2;
     Tx1 = ofdm_mod(qamStream1,N,0,Ld1,L_CP,0,goodFreqs);
     Tx2 = ofdm_mod(qamStream2,N,Lt,Ld2,L_CP,trainblock,goodFreqs);
 
@@ -51,13 +51,11 @@
     sim('recplay');
     out=simout.signals.values;
     out_aligned = alignIO(out,0.05,tSync);
-    Rx = out_aligned(1:(N+L_CP)*(Ld+Lt));
-    
-    Rx2 = Rx-Tx1;
-    %ECHO CANCELLATION
+    Rx = out_aligned(1:(N+L_CP)*(Ld1+Lt));
+
     
 %---OFDM demod---%
-     [rxQamStream,W] = ofdm_demod(Rx, N,M,L_CP,Lt,Ld,trainblock,goodFreqs);
+     [rxQamStream,W] = ofdm_demod_duplex(Rx, N,M,L_CP,Lt,Ld1,trainblock,goodFreqs);
     
     figure()
     plot(20*log(abs(ifft(conj(1./W(:,1)),N))));
